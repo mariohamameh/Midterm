@@ -8,12 +8,17 @@ Option 8: Buy/Sell Listing Website
 
 Web app designed as digital marketplace for art.
 
-
 ## Project Requirements -> User Story & Functionality
+- [] Main Page: feature items - randomized from Favourites
+- [] Login Page: Cannot access site without login from registered user
+- [] Registration Page: Register for account with username and password
+- [] Converstaions: List of all items where buyer has messaged seller
+- [] Items: Scroll thru list, filter on price, selecting items opens specific page, mark/unmark favourites
+- [] Messages: Avaliable once user message buyers
+- [] Add Item Page: Create Listing for new items 
   ### Login
 - [] Have a profile with username and id # associated with account 
 - [] Site remembers user once logged in
-- [] Main Page will have feature items - randomized from Favourites
   ### Items
 - [] Each item will have image, artist name, artist bio, price if avaliable, seller(admin) name
 - [] Favourite items while browsing items
@@ -35,9 +40,12 @@ Web app designed as digital marketplace for art.
 - [] STRECH: Provide review for sellers
 - [] STRECH: Timestamps for when a listing is posted 
 - [] STRECH: Filter by Date listed (timestamps)
-- [] STRECH: Like item
+- [] STRECH: Like Items
+- [] STRECH: Login via Google
 
 ## Project Requirements -> Admin(Seller) Story & Added Functionality
+- [] Same functationality as User
+  ### Items
 - [] Post items which can be seen by others
 - [] Mark items as SOLD
 - [] DELETE items from site
