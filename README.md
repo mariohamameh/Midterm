@@ -13,7 +13,7 @@ Web app designed as digital marketplace for art.
 - [] Login Page: Cannot access site without login from registered user
 - [] Registration Page: Register for account with username and password
 - [] Converstaions: List of all items where buyer has messaged seller
-- [] Items: Scroll thru list, filter on price, selecting items opens specific page, mark/unmark favourites
+- [] Items: Scroll thru list, filter on price, selecting items opens specific page, mark/unmark favourites, can be edited by admin
 - [] Messages: Avaliable once user message buyers
 - [] Add Item Page: Create Listing for new items 
   ### Login
