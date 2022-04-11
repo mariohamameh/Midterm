@@ -10,27 +10,27 @@ const router  = express.Router();
 
 module.exports = (database) => {
   router.get("/", (req, res) => {
+    res.send('hello');
     database.getAllArtist()
       .then(users => {
         console.log("USERS:",users);
         res.json({ users });
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        //console.error(err);
+        //res.send(err);
       });
   });
-  /*
-  router.get('/properties', (req, res) => {
-    database.getAllProperties(req.query, 20)
-    .then(properties => res.send({properties}))
+  
+  router.get('/artists/:id', (req, res) => {
+    console.log(`incoming ${req.params.id}`);
+    database.filterByArtist(req.params.id)
+    .then(artists => res.send({artists}))
     .catch(e => {
       console.error(e);
       res.send(e)
     }); 
   });
-  */
   return router;
 };
 
