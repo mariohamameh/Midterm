@@ -80,12 +80,8 @@ const getUserWithEmail = function (email) {
       console.log(result.rows[0]);
       return result.rows[0];
     })
-    .catch((err) => {
-      console.log(err.message);
-    });
+    .catch(err => console.error('query error', err.stack));
 };
-exports.getUserWithEmail = getUserWithEmail;
-
 
 const getFavouritesForUser = function(userID) {
   return pool.query(`
@@ -97,9 +93,7 @@ const getFavouritesForUser = function(userID) {
     console.log(res.rows);
     return res.rows;
   })
-  .catch((error => {
-    console.log("Error message", error)
-  }));
+  .catch(err => console.error('query error', err.stack));
 };
 
 const isItemFavourited = function(userID, itemID) {
@@ -108,7 +102,7 @@ const isItemFavourited = function(userID, itemID) {
   WHERE user_id = $1 AND item_id = $2)`, [userID, itemID])
   .then(res => {
     return res.rows;
-  }).catch(err => console.log(err));
+  }).catch(err => console.error('query error', err.stack));
 }
 
 //Search functions through filter
@@ -186,9 +180,17 @@ const searchByArtist = function(itemArtist, orderBy) {
 // };
 // exports.filterByArtist = filterByArtist;
 
+exports.createNewItem = createNewItem;
+exports.deleteItem = deleteItem;
+exports.markItemAsSold = markItemAsSold;
+exports.favouriteItem = favouriteItem;
+exports.unfavourite = unfavourite;
 
 exports.getAllUsers = getAllUsers;
+exports.getUserWithEmail = getUserWithEmail;
 exports.getFavouritesForUser = getFavouritesForUser;
+exports.isItemFavourited = isItemFavourited;
+
 exports.searchByMaxPrice = searchByMaxPrice;
 exports.searchByMinPrice = searchByMinPrice;
 exports.searchByTitle = searchByTitle;
