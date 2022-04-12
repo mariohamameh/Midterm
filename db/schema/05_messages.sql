@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS messages CASCADE;
-CREATE TABLE messages (
-  id SERIAL PRIMARY KEY NOT NULL,
-  conversation_id INTEGER REFERENCES conversations(id) NOT NULL,
-  from_buyer BOOLEAN NOT NULL DEFAULT TRUE,
-  content VARCHAR(255) NOT NULL
-);
