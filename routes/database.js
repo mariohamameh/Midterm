@@ -113,10 +113,10 @@ const isItemFavourited = function(userID, itemID) {
 
 //Search functions through filter
 
-const searchByMaxPrice = function(bookPrice, orderBy) {
+const searchByMaxPrice = function(price, orderBy) {
   let queryString = `SELECT * FROM items WHERE price <= $1 ORDER BY `
   queryString += orderBy
-  const values = [bookPrice]
+  const values = [price]
   return pool.query(queryString, values)
   .then(res => {
     return res.rows;
@@ -124,10 +124,10 @@ const searchByMaxPrice = function(bookPrice, orderBy) {
   .catch(err => console.error('query error', err.stack));
 };
 
-const searchByMinPrice = function(bookPrice, orderBy) {
+const searchByMinPrice = function(price, orderBy) {
   let queryString = `SELECT * FROM items WHERE price >= $1 ORDER BY `
   queryString += orderBy
-  const values = [bookPrice]
+  const values = [price]
   return pool.query(queryString, values)
   .then(res => {
     return res.rows;
@@ -135,10 +135,10 @@ const searchByMinPrice = function(bookPrice, orderBy) {
   .catch(err => console.error('query error', err.stack));
 };
 
-const searchByTitle = function(bookTitle, orderBy) {
+const searchByTitle = function(title, orderBy) {
   let queryString = `SELECT * FROM items WHERE title LIKE $1 ORDER BY `
   queryString += orderBy
-  const values = [`%${bookTitle}%`]
+  const values = [`%${title}%`]
   return pool.query(queryString, values)
   .then(res => {
     return res.rows;
