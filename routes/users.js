@@ -10,15 +10,14 @@ const router  = express.Router();
 
 module.exports = (database) => {
   router.get("/", (req, res) => {
-    res.send('hello');
     database.getAllArtist()
       .then(users => {
         console.log("USERS:",users);
         res.json({ users });
       })
       .catch(err => {
-        //console.error(err);
-        //res.send(err);
+        console.error(err);
+        res.send(err);
       });
   });
   
@@ -31,6 +30,7 @@ module.exports = (database) => {
       res.send(e)
     }); 
   });
+  
   return router;
 };
 
