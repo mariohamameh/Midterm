@@ -9,9 +9,9 @@ const pool = new Pool(dbParams);
  */
 const filterByArtist = (id) => {
   console.log(`FilterbyArtist is RUNNING,${id}`);
-  let queryString = ` 
+  let queryString = `
   SELECT *
-  FROM artists 
+  FROM artists
   `
   if (id == 1) {
     queryString += `WHERE id = 1;`;
@@ -35,7 +35,7 @@ const filterByArtist = (id) => {
 exports.filterByArtist = filterByArtist;
 
 const getAllArtist=()=>{
-  
+
   return pool.query(`SELECT * FROM users;`)
   .then(res => {
     return res.rows;
@@ -46,6 +46,7 @@ const getAllArtist=()=>{
 }
 exports.getAllArtist = getAllArtist;
 
+<<<<<<< HEAD
 //database
 const getUserWithEmail = function (email) {
   return pool
@@ -59,3 +60,21 @@ const getUserWithEmail = function (email) {
     });
 };
 exports.getUserWithEmail = getUserWithEmail;
+=======
+const getFavouritesForUser = function(userID) {
+  return pool.query(`
+  SELECT * FROM items
+  JOIN favourites ON favourites.item_id = items.id
+  WHERE user_id = $1;
+  `, [userID])
+  .then(res => {
+    console.log(res.rows);
+    return res.rows;
+  })
+  .catch((error => {
+    console.log("Error message", error)
+  }));
+};
+
+exports.getFavouritesForUser = getFavouritesForUser
+>>>>>>> f506bd7a5a018f91184bfb2f04ceb0dbceb98c34
