@@ -58,8 +58,6 @@ const unfavourite = function(userID, itemID) {
 
 
 
-
-
 //GENERAL FUNCTIONS
 
 const getAllUsers=()=>{
@@ -94,6 +92,45 @@ const getFavouritesForUser = function(userID) {
     return res.rows;
   })
   .catch(err => console.error('query error', err.stack));
+};
+
+const getUsersItems = function(userID) {
+  return pool.query(`
+  SELECT * FROM items
+  WHERE seller_id = $1;
+  `, [userID])
+  .then(res => {
+    return res.rows;
+  })
+  .catch((error => {
+    console.log("Error message", error)
+  }));
+};
+
+const getAllItems = function(user_id) {
+  const itemsQuery = pool.query(`
+  SELECT items.*, users.email
+  FROM items
+  JOIN users ON users.id = seller_id`)
+  const favouritesQuery =  pool.query(
+    `SELECT *
+    FROM favourites
+    WHERE user_id = $1`, [user_id])
+  return Promise.all([itemsQuery, favouritesQuery])
+  .then(res => {
+    const items = res[0].rows
+    const favourites = res[1].rows
+    for (const favourite of favourites) {
+      const foundItems = items.find( items => {
+      return items.id === favourite.items_id;
+      })
+      foundItems.isFavourite = true
+    }
+    return items;
+  })
+  .catch((error => {
+    console.log("Error message", error)
+  }));
 };
 
 const isItemFavourited = function(userID, itemID) {
@@ -189,6 +226,8 @@ exports.unfavourite = unfavourite;
 exports.getAllUsers = getAllUsers;
 exports.getUserWithEmail = getUserWithEmail;
 exports.getFavouritesForUser = getFavouritesForUser;
+exports.getUsersItems = getUsersItems;
+exports.getAllItems = getAllItems;
 exports.isItemFavourited = isItemFavourited;
 
 exports.searchByMaxPrice = searchByMaxPrice;
