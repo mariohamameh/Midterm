@@ -18,8 +18,6 @@ module.exports = (database) => {
   router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    
-    //const user_id = generateRandomString();
     login(email, password, database)
       .then(user => {
         
@@ -31,13 +29,8 @@ module.exports = (database) => {
         const templateVars = {
           user: user,
         };
-        //user[user_id] = user;
         req.session.user_id = user.id;
-        //console.log(templateVars);
-        //req.session.user_id = user.id;
-        //res.render("logout");
-        //res.send({user: {name: users.name, email: users.email, id: users.id}});
-        return res.render("index", templateVars);
+        return res.redirect("/");
       })
       .catch(e => res.send(e));
   });

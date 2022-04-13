@@ -1,5 +1,5 @@
 const { Pool } = require("pg");
-const databaseParams = require('../lib/database.js');
+const databaseParams = require('../lib/db.js');
 const pool = new Pool(databaseParams);
 //pool.connect();
 /**
