@@ -7,6 +7,8 @@ const pool = new Pool(databaseParams);
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 
+//QUESTION: Need to incoporate req.session.userId = user.id
+
 // ITEM RELATED FUNCTIONS
 const createNewItem = function(item) {
   return pool.query(`
@@ -20,10 +22,10 @@ const createNewItem = function(item) {
     .catch(error => console.error('query error', error.stack));
 };
 
-const deleteItem = function(user__id, item_id) {
+const deleteItem = function(user_id, item_id) {
   return pool.query(`
   DELETE FROM items WHERE seller__id = $1 AND _id = $2;
-  `, [user__id, item_id]);
+  `, [user_id, item_id]);
 };
 
 const markItemAsSold = function(item_id) {
@@ -34,18 +36,18 @@ const markItemAsSold = function(item_id) {
   `, [item_id]);
 };
 
-const favouriteItem = function(user__id, item_id) {
+const favouriteItem = function(user_id, item_id) {
   return pool.query(`
-  INSERT INTO favourites (user__id, item__id)
+  INSERT INTO favourites (user_id, item__id)
   VALUES ($1, $2)
   RETURNING *;
-  `, [user__id, item_id]);
+  `, [user_id, item_id]);
 };
 
-const unfavourite = function(user__id, item_id) {
+const unfavourite = function(user_id, item_id) {
   return pool.query(`
-  DELETE FROM favourites WHERE user__id = $1 AND item__id = $2;
-  `, [user__id, item_id])
+  DELETE FROM favourites WHERE user_id = $1 AND item__id = $2;
+  `, [user_id, item_id])
     .then(() => {
       console.log("Deleted!");
     })
@@ -74,12 +76,12 @@ const getUserWithEmail = function(email) {
     .catch(error => console.error('query error', error.stack));
 };
 
-const getFavouritesForUser = function(user__id) {
+const getFavouritesForUser = function(user_id) {
   return pool.query(`
   SELECT * FROM items
   JOIN favourites ON favourites.item__id = items._id
-  WHERE user__id = $1;
-  `, [user__id])
+  WHERE user_id = $1;
+  `, [user_id])
     .then(res => {
       console.log(res.rows);
       return res.rows;
@@ -87,26 +89,26 @@ const getFavouritesForUser = function(user__id) {
     .catch(error => console.error('query error', error.stack));
 };
 
-const getUsersItems = function(user__id) {
+const getUsersItems = function(user_id) {
   return pool.query(`
   SELECT * FROM items
   WHERE seller__id = $1;
-  `, [user__id])
+  `, [user_id])
     .then(res => {
       return res.rows;
     })
     .catch(error => console.error('query error', error.stack));
 };
 
-const getAllItems = function(user__id) {
+const getAllItems = function(user_id) {
   const itemsQuery = pool.query(`
   SELECT items.*, users.email
   FROM items
-  JOIN users ON users._id = seller__id;`);
+  JOIN users ON users.id = seller__id;`);
   const favouritesQuery =  pool.query(
     `SELECT *
     FROM favourites
-    WHERE user__id = $1;`, [user__id]);
+    WHERE user_id = $1;`, [user_id]);
   return Promise.all([itemsQuery, favouritesQuery])
     .then(res => {
       const items = res[0].rows;
@@ -122,10 +124,10 @@ const getAllItems = function(user__id) {
     .catch(error => console.error('query error', error.stack));
 };
 
-const isItemFavourited = function(user__id, item_id) {
+const isItemFavourited = function(user_id, item_id) {
   return pool.query(`
   SELECT EXISTS (SELECT 1 FROM favourites
-  WHERE user__id = $1 AND item__id = $2);`, [user__id, item_id])
+  WHERE user_id = $1 AND item__id = $2);`, [user_id, item_id])
     .then(res => {
       return res.rows;
     }).catch(error => console.error('query error', error.stack));

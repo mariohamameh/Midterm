@@ -20,20 +20,93 @@ module.exports = (database) => {
         res.send(err);
       });
   });
-  
-  router.get('/artists/:id', (req, res) => {
-    console.log(`incoming ${req.params.id}`);
-    database.filterByArtist(req.params.id)
-    .then(artists => res.send({artists}))
-    .catch(e => {
-      console.error(e);
-      res.send(e)
-    }); 
+
+  // GET favourites for logged in user
+  router.get("/favourites", (req, res) => {
+    const userID = req.session.user_id;
+    if (!userID) {
+      return res.redirect("/main");
+    }
+    database.getFavouritesForUser(userID)
+      .then((favourites) => {
+        const templateVars = { favourites };
+        res.render("favourites", templateVars);
+      });
   });
-  
+
+
+  // GET my_items for logged in user
+  router.get("/myItems", (req, res) => {
+    const userID = req.session.user_id;
+    if (!userID) {
+      return res.redirect("/main");
+    }
+    database.getUsersListings(userID)
+      .then((myListings) => {
+        const templateVars = { myItems };
+        console.log(templateVars);
+        res.render("myItems", templateVars);
+
+      });
+  });
+
+  /// Create new Item
+  app.post("/create_item", (req, res) => {
+    const userID = req.session.user_id
+
+    if(!userID) {
+     return res.redirect("/main"); /// QUESTION -> where to redirect? login page?
+    }
+
+    const newListing = req.body;
+    newListing.seller_id = userID;
+
+    database.createNewItem(newListing)
+    .then(() => {
+      database.getUsersItem(userID)
+        .then((res1) => {
+          let templateVars = { myListings: res1 };
+          return res.render("myListings", templateVars);
+        });
+
+      });
+  });
+
+  // DELETE delete your listing(s): Done
+  app.post("/my_listings/:listing_id/delete", (req, res) => {
+    const userID = req.session.user_id;
+    const listingID = req.params.listing_id;
+    if (!userID) {
+      res.redirect("/");
+    }
+    database.deleteListing(userID, listingID)
+      .then(() => {
+        res.redirect("/api/users/myListings");
+      });
+  });
+
+
+  // PUT mark your listing as sold: Done
+  app.post("/my_listings/:listing_id/sold", (req, res) => {
+    const userID = req.session.user_id
+    const listingID = req.params.listing_id;
+
+    if(!userID) {
+    return res.redirect("/");
+    }
+
+    database.markListingAsSold(listingID)
+      .then(() => {
+        res.redirect("/api/users/myListings");
+      });
+
+});
+
+
+
   return router;
 };
 
 
-  
+
 

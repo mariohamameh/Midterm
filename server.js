@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 // Web server config
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3005;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
@@ -39,11 +39,16 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const users = require("./routes/login");
+const search = require("./routes/searches");
+const conversations = require("./routes/conversations")
+const favourites = require("./routes/favourites");
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", users(database));
 app.use("/api/users", usersRoutes(database));
 app.use("/api/widgets", widgetsRoutes(database));
+app.use("/api/searches", search(database));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -51,7 +56,9 @@ app.use("/api/widgets", widgetsRoutes(database));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = { items: [] };
+  console.log("testing render for Index")
+  res.render("index", templateVars );
 });
 
 app.listen(PORT, () => {

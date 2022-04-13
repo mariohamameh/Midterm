@@ -1,4 +1,4 @@
-Virual Gallery
+Virtual Gallery
 =========
 
 ## Project Overview 

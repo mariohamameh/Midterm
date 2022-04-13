@@ -21,14 +21,14 @@
   <!-- SECTION SEARCH -->
   <div class="search">
     <!-- QUESTION unsure about specific route, do we include Api inside url parameters?? -->
-    <form class="d-flex" action="/api/search/main/search" method="GET">
+    <form class="d-flex" action="/api/search/" method="GET">
       <!-- <input type="hidden" name="searchType" value="title"> -->
       <label for="searchType">Search By:</label>
       <select name="searchType" id="searchType">
         <option value="title">By Title</option>
         <option value="artist">By Artist</option>
-       <option value="maxPrice">Max Price</option>
-       <option value="minPrice">Min Price</option>
+        <option value="maxPrice">Max Price</option>
+        <option value="minPrice">Min Price</option>
       <input class="form-control me-2" type="text" name="searchText" placeholder="Search" aria-label="Search">
       <label for="searchOrder">Sort By:</label>
        <select name="searchOrder" id="searchOrder">
@@ -40,6 +40,46 @@
       <button class="btn btn-outline-danger button-width" type="submit"><i class="fas fa-search"></i> Search</button>
     </form>
   </div>
-</body>
 
+
+  <!-- SECTION LISTINGS -->
+  <section class="listings">
+    <div class="container-fluid col-lg-12">
+      <div class="row">
+        <% for (let item of items) { %>
+          <!-- CARD ELEMENT -->
+          <div class="card" style="width: 15rem;">
+            <% if (item.issold) { %>
+              <h2 class="sold-sign">SOLD</h2>
+            <% } %>
+            <img src= "<%= item.picture_url %>" class="card-img-top picture-size" alt="item">
+            <div class="card-body">
+              <h5 class="card-title"> <%= item.title %> </h5>
+              <p class="card-text"> <i><%= item.author %></i> </p>
+              <p class="card-text"> <%= item.description %> </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Price: $<%= item.price %></li>
+              <li class="list-group-item">Condition: <%= item.condition %></li>
+            <form action="/api/users/<%= item.id %>/favourite" method="POST">
+              <li id="favourite-button" class="list-group-item"><button type="submit">Favourite</button>
+                <% if (item.isFavourite) { %>
+                  <i class="fas fa-heart activeHeartIcon"></i>
+                <% } else { %>
+                <i class="fas fa-heart"></i>
+                <% } %>
+                </li>
+            </form>
+            </ul>
+            <div class="card-body">
+             -->
+              <!-- <a href="#" class="card-link">Another link</a> -->
+            </div>
+          </div>
+       <% } %>
+
+      </div>
+    </div>
+  </section>
+</body>
 </html>
