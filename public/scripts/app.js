@@ -1,38 +1,43 @@
-// Client facing scripts here
 /*
+
 $(() => {
 
-    const $filterArtistsForm = $(`
-    <form action="/artists" method="get" id="filter-artists-form" class="filter-artists-form">
-        <div class="search-property-form__field-wrapper">
-          <label for="search-property-form__city">City</label>
-          <input type="text" name="artist" placeholder="Artist" id="filter-artists-form__artist">
-        </div>
   
-        <div class="filter-artists-form__field-wrapper">
-            <button>Search</button>
-            <a id="filter-artists-form__cancel" href="#">Cancel</a>
+    const $logInForm = $(`
+  <form id="login-form" class="login-form">
+      <p>Login</p>
+      <div class="login-form__field-wrapper">
+        <input type="email" name="email" placeholder="Email">
+      </div>
+
+      <div class="login-form__field-wrapper">
+          <input type="password" name="password" placeholder="Password">
         </div>
-      </form>
-    `)
-    window.$filterArtistsForm = $filterArtistsForm;
-  
-    $filterArtistsForm.on('submit', function(event) {
-      event.preventDefault();
-      const data = $(this).serialize();
-      const $main = $('#main-content');
-      getAllArtists(data).then(function( json ) {
-        ArtistListings.addArtists(json.artists);
-        $propertyListings.appendTo($main);
-        //views_manager.show('listings');
+
+      <div class="login-form__field-wrapper">
+          <button>Login</button>
+          <a id="login-form__cancel" href="#">Cancel</a>
+      </div>
+    </form>
+  `);
+
+  window.$logInForm = $logInForm;
+
+  $logInForm.on('submit', function(event) {
+    event.preventDefault();
+
+    const data = $(this).serialize();
+    logIn(data)
+      .then(json => {
+        console.log(json);
+        if (!json.user) {
+          views_manager.show('error', 'Failed to login');
+          return;
+        }
+        console.log(json.user);
+        header.update(json.user);
+        views_manager.show('listings');
       });
-    });
-  
-    $('body').on('click', '#filter-artists-form__cancel', function() {
-      views_manager.show('listings');
-      return false;
-    });
-  
   });
 
   */

@@ -1,42 +1,65 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcrypt');
+
 
 module.exports = (database) => {
   router.get("/login", (req, res) => {
-    console.log(`incoming ${req.params}`);
-    database.getUserWithEmail(req.params)
-      .then((users) => res.send({ users }))
+    let user = database.getUserWithId(req.session['user_id']);
+    const templateVars = {
+      user: null,
+    };
+    database.getUserWithEmail(req.body)
+      .then((users) => res.render("login", templateVars))
       .catch((e) => {
         console.error(e);
         res.send(e);
       });
   });
+  router.post('/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    
+    //const user_id = generateRandomString();
+    login(email, password, database)
+      .then(user => {
+        
+        if (!user) {
+          
+          res.send({error: "error"});
+          return;
+        }
+        const templateVars = {
+          user: user,
+        };
+        //user[user_id] = user;
+        req.session.user_id = user.id;
+        //console.log(templateVars);
+        //req.session.user_id = user.id;
+        //res.render("logout");
+        //res.send({user: {name: users.name, email: users.email, id: users.id}});
+        return res.render("index", templateVars);
+      })
+      .catch(e => res.send(e));
+  });
   return router;
 };
 
 
-const login =  function(email, password) {
+const login =  function(email, password, database) {
   return database.getUserWithEmail(email)
   .then(user => {
-    if (bcrypt.compareSync(password, user.password)) {
-      return user;
-    }
-    return null;
+    //hashed password goes here
+    return user;
   });
 }
 exports.login = login;
 
-router.post('/login', (req, res) => {
-  const {email, password} = req.body;
-  login(email, password)
-    .then(user => {
-      if (!user) {
-        res.send({error: "error"});
-        return;
-      }
-      req.session.userId = user.id;
-      res.send({user: {name: user.name, email: user.email, id: user.id}});
-    })
-    .catch(e => res.send(e));
-});
+
+function generateRandomString() {
+  const minVal = 35 ** 5;
+  const randomVal = Math.floor(Math.random() * minVal) + minVal;
+  return randomVal.toString(35);
+}
+
+exports.generateRandomString = generateRandomString;
+

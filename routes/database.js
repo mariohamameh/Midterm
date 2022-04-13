@@ -2,6 +2,7 @@
 const { Pool } = require("pg");
 const dbParams = require('../lib/db.js')
 const pool = new Pool(dbParams);
+const userloggedin = false;
 //pool.connect();
 /**
  * Get all properties.
@@ -46,21 +47,36 @@ const getAllArtist=()=>{
 }
 exports.getAllArtist = getAllArtist;
 
-<<<<<<< HEAD
+
 //database
 const getUserWithEmail = function (email) {
   return pool
     .query(`SELECT * FROM users WHERE email = $1`, [email])
-    .then((result) => {
-      console.log(result.rows[0]);
-      return result.rows[0];
+    .then((res) => {
+      //console.log(res.rows[0]);
+      //console.log(`this is ${email}`);
+      return res.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
     });
+    
 };
 exports.getUserWithEmail = getUserWithEmail;
-=======
+const getUserWithId = function (id) {
+  return pool
+    .query(`SELECT * FROM users WHERE id = $1`, [id])
+    .then((res) => {
+      //console.log(res.rows[0]);
+      //console.log(`this is ${email}`);
+      return res.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+    
+};
+exports.getUserWithId = getUserWithId;
 const getFavouritesForUser = function(userID) {
   return pool.query(`
   SELECT * FROM items
@@ -77,4 +93,4 @@ const getFavouritesForUser = function(userID) {
 };
 
 exports.getFavouritesForUser = getFavouritesForUser
->>>>>>> f506bd7a5a018f91184bfb2f04ceb0dbceb98c34
+
