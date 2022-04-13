@@ -1,5 +1,5 @@
 const { Pool } = require("pg");
-const databaseParams = require('../lib/database.js');
+const databaseParams = require('../lib/db.js');
 const pool = new Pool(databaseParams);
 //pool.connect();
 /**
@@ -65,16 +65,35 @@ const getAllUsers = ()=>{
     })
     .catch(error => console.error('query error', error.stack));
 };
-
-const getUserWithEmail = function(email) {
+//database
+const getUserWithEmail = function (email) {
   return pool
-    .query(`SELECT * FROM users WHERE email = $1;`, [email])
-    .then((result) => {
-      console.log(result.rows[0]);
-      return result.rows[0];
+    .query(`SELECT * FROM users WHERE email = $1`, [email])
+    .then((res) => {
+      //console.log(res.rows[0]);
+      //console.log(`this is ${email}`);
+      return res.rows[0];
     })
-    .catch(error => console.error('query error', error.stack));
+    .catch((err) => {
+      console.log(err.message);
+    });
+    
 };
+exports.getUserWithEmail = getUserWithEmail;
+const getUserWithId = function (id) {
+  return pool
+    .query(`SELECT * FROM users WHERE id = $1`, [id])
+    .then((res) => {
+      //console.log(res.rows[0]);
+      //console.log(`this is ${email}`);
+      return res.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+    
+};
+exports.getUserWithId = getUserWithId;
 
 const getFavouritesForUser = function(user_id) {
   return pool.query(`

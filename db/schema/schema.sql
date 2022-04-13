@@ -19,7 +19,7 @@ CREATE TABLE items (
   seller_id INTEGER REFERENCES users(id) NOT NULL,
   artist VARCHAR(100) NOT NULL,
   artist_bio TEXT,
-  is_featured BOOLEAN NOT NULL DEFAULT FALSE
+  is_featured BOOLEAN NOT NULL DEFAULT FALSE,
   -- category_id INTEGER REFERENCES artists(id) NOT NULL -> potentially added if category filter is added
   date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   image_url VARCHAR(255) NOT NULL,

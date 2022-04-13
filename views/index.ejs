@@ -15,7 +15,7 @@
 
 <body>
   <header>
-    <%- include('partials/_header') %>
+
   </header>
 
   <!-- SECTION SEARCH -->
@@ -40,6 +40,21 @@
       <button class="btn btn-outline-danger button-width" type="submit"><i class="fas fa-search"></i> Search</button>
     </form>
   </div>
+
+  <% if (user) { %>
+    <form method="POST" action="/logout" class="form-inline">
+      <div class="form-group form-inline">
+        <label>Logged In As: <%= user.name %></label>
+        <button type="submit" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
+      </div>
+    </form>
+  <% } else { %>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/login" style="margin: 1em">Login</a>
+      </div>
+    </div>
+    <% } %>
 
 
   <!-- SECTION LISTINGS -->

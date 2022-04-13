@@ -8,6 +8,10 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const database = require('./routes/database.js');
+const bodyParser = require('body-parser');
+const cookieSession = require("cookie-session");
+
+
 // PG database client/connection setup
 /*
 const { Pool } = require("pg");
@@ -22,6 +26,13 @@ app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["user_id", "abc"],
+    maxAge: 24 * 60 * 60 * 1000,
+  })
+);
 
 app.use(
   "/styles",
@@ -33,7 +44,7 @@ app.use(
 );
 
 app.use(express.static("public"));
-
+app.use(bodyParser.urlencoded({ extended: true }));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
@@ -43,9 +54,11 @@ const search = require("./routes/searches");
 const conversations = require("./routes/conversations")
 const favourites = require("./routes/favourites");
 
+const userlogout = require("./routes/logout");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/users", users(database));
+app.use("/", userlogout(database));
+app.use("/", users(database));
 app.use("/api/users", usersRoutes(database));
 app.use("/api/widgets", widgetsRoutes(database));
 app.use("/api/searches", search(database));
@@ -56,9 +69,17 @@ app.use("/api/searches", search(database));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  const templateVars = { items: [] };
-  console.log("testing render for Index")
-  res.render("index", templateVars );
+  database.getUserWithId(req.session['user_id'])
+  .then((user)=> {
+    console.log(user);
+    const templateVars = {
+      user: user,
+      items: []
+    }
+    res.render("index", templateVars );
+  });
+
+
 });
 
 app.listen(PORT, () => {
