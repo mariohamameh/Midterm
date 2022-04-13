@@ -71,13 +71,18 @@ app.use("/api/searches", search(database));
 app.get("/", (req, res) => {
   database.getUserWithId(req.session['user_id'])
   .then((user)=> {
-    console.log(user);
-    const templateVars = {
-      user: user,
-      items: []
-    }
-    res.render("index", templateVars );
+    database.getAllItems()
+    .then((items)=> {
+      console.log(user);
+      const templateVars = {
+        user: user,
+        items: items
+      }
+      res.render("index", templateVars );
+    })
   });
+
+
 
 
 });

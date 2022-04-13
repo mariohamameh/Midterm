@@ -8,7 +8,6 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   username VARCHAR(255) NOT NULL,
   email VARCHAR(100) NOT NULL
-  -- is_admin BOOLEAN NOT NULL DEFAULT FALSE -> how to distinguish users vs admins
 );
 
 CREATE TABLE items (
@@ -20,7 +19,6 @@ CREATE TABLE items (
   artist VARCHAR(100) NOT NULL,
   artist_bio TEXT,
   is_featured BOOLEAN NOT NULL DEFAULT FALSE,
-  -- category_id INTEGER REFERENCES artists(id) NOT NULL -> potentially added if category filter is added
   date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   image_url VARCHAR(255) NOT NULL,
   is_sold BOOLEAN NOT NULL DEFAULT FALSE
