@@ -44,7 +44,7 @@
   <% if (user) { %>
     <form method="POST" action="/logout" class="form-inline">
       <div class="form-group form-inline">
-        <label>Logged In As: <%= user.name %></label>
+        <label>Logged In As: <%= user.username %></label>
         <button type="submit" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
       </div>
     </form>
@@ -61,7 +61,7 @@
   <section class="listings">
     <div class="container-fluid col-lg-12">
       <div class="row">
-        <% for (let item of items) { %>
+        <% for (let item in items) { %>
           <!-- CARD ELEMENT -->
           <div class="card" style="width: 15rem;">
             <% if (item.issold) { %>

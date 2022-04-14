@@ -5,8 +5,10 @@ const router = express.Router();
 module.exports = (database) => {
   router.get("/login", (req, res) => {
     let user = database.getUserWithId(req.session['user_id']);
+    let items = database.getAllItems();
     const templateVars = {
       user: null,
+      items: items
     };
     database.getUserWithEmail(req.body)
       .then((users) => res.render("login", templateVars))
@@ -28,8 +30,10 @@ module.exports = (database) => {
         }
         const templateVars = {
           user: user,
+          
         };
         req.session.user_id = user.id;
+        req.session.user_name = user.username;
         return res.redirect("/");
       })
       .catch(e => res.send(e));

@@ -4,17 +4,17 @@ const router = express.Router();
 module.exports = (database) => {
   router.get("/logout", (req, res) => {
     let user = database.getUserWithId(req.session["user_id"]);
+    let items = database.getAllItems();
     const templateVars = {
-      user: user,
+      user: null,
+      items: items
     };
     res.render("logout", templateVars);
   });
 
   router.post("/logout", (req, res) => {
 
-    // const templateVars = {
-    //   user: null,
-    // };
+    req.session.user_id = null;
     res.redirect("/");
   });
   return router;

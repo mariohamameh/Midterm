@@ -194,16 +194,27 @@ const searchByTitle = function(title, orderBy) {
 };
 
 const searchByArtist = function(artist, orderBy) {
-  let queryString = `SELECT * FROM items WHERE artist LIKE $1 ORDER BY;`;
+  return pool.query(`
+  SELECT * FROM items WHERE items.artist = $1 ${orderBy};`, [artist])
+    .then(dbRes => {
+      return dbRes.rows;
+    })
+    .catch(error => console.error('query error', error.stack));
+  };
+
+
+
+/*
+  let queryString = `SELECT * FROM items`;
   queryString += orderBy;
   const values = [`%${artist}`];
-  return pool.query(queryString, values)
+  return pool.query(queryString)
     .then(dbRes => {
       return dbRes.rows;
     })
     .catch(error => console.error('query error', error.stack));
 };
-
+*/
 //// MESSAGES
 const getMessagesforUser = function(user_id) {
   return pool.query(
