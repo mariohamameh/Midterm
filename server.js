@@ -61,19 +61,20 @@ app.use("/", userlogout(database));
 app.use("/", users(database));
 app.use("/api/users", usersRoutes(database));
 app.use("/api/widgets", widgetsRoutes(database));
-app.use("/api/search", search(database));
+app.use("/api/searches", search(database));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+
 app.get("/", (req, res) => {
   database.getUserWithId(req.session['user_id'])
   .then((user)=> {
     database.getAllItems()
     .then((items)=> {
-      console.log(user);
+      console.log("checking for user", user);
       const templateVars = {
         user: user,
         items: items
@@ -81,9 +82,6 @@ app.get("/", (req, res) => {
       res.render("index", templateVars );
     })
   });
-
-
-
 
 });
 

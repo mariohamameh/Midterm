@@ -6,95 +6,107 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+  <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <header>
+     <!-- Top nav bar (fixed) -->
+     <nav id="nav-bar">
+      <div id="logoContainer">
 
-  </header>
-
-  <!-- SECTION SEARCH -->
-  <div class="search">
-    <!-- QUESTION unsure about specific route, do we include Api inside url parameters?? -->
-    <form class="d-flex" action="/api/search/" method="GET">
-      <!-- <input type="hidden" name="searchType" value="title"> -->
-      <label for="searchType">Search By:</label>
-      <select name="searchType" id="searchType">
-        <option value="title">By Title</option>
-        <option value="artist">By Artist</option>
-        <option value="maxPrice">Max Price</option>
-        <option value="minPrice">Min Price</option>
-      <input class="form-control me-2" type="text" name="searchText" placeholder="Search" aria-label="Search">
-      <label for="searchOrder">Sort By:</label>
-       <select name="searchOrder" id="searchOrder">
-        <option value="lowPrice">Lowest Price</option>
-        <option value="highPrice">Highest Price</option>
-        <option value="byTitle">By Title</option>
-        <option value="byArtist">By Artist</option>
-       </select>
-      <button class="btn btn-outline-danger button-width" type="submit"><i class="fas fa-search"></i> Search</button>
-    </form>
-  </div>
-
-  <% if (user) { %>
-    <form method="POST" action="/logout" class="form-inline">
-      <div class="form-group form-inline">
-        <label>Logged In As: <%= user.username %></label>
-        <button type="submit" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
-      </div>
-    </form>
-  <% } else { %>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/login" style="margin: 1em">Login</a>
-      </div>
-    </div>
-    <% } %>
-
-
-  <!-- SECTION LISTINGS -->
-  <section class="listings">
-    <div class="container-fluid col-lg-12">
-      <div class="row">
-        <% for (let item in items) { %>
-          <!-- CARD ELEMENT -->
-          <div class="card" style="width: 15rem;">
-            <% if (item.is_sold) { %>
-              <h2 class="sold-sign">SOLD</h2>
-            <% } %>
-            <img src= "<%= item.picture_url %>" class="card-img-top picture-size" alt="item">
-            <div class="card-body">
-              <h5 class="card-title"> <%= item.title %> </h5>
-              <p class="card-text"> <i><%= item.artist %></i> </p>
-              <p class="card-text"> <%= item.description %> </p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Price: $<%= item.price %></li>
-              <li class="list-group-item">Condition: <%= item.condition %></li>
-            <form action="/api/users/<%= item.id %>/favourite" method="POST">
-              <li id="favourite-button" class="list-group-item"><button type="submit">Favourite</button>
-                <% if (item.isFavourite) { %>
-                  <i class="fas fa-heart activeHeartIcon"></i>
-                <% } else { %>
-                <i class="fas fa-heart"></i>
-                <% } %>
-                </li>
+        <span class="header">LOGO Location</span>
+        </div>
+        <div id="loginButton">
+          <% if (user && user.username) { %>
+            <form method="POST" action="/logout" class="form-inline">
+              <div>
+                <label>Logged In As: <%= user.username %></label>
+                <button type="submit" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
+              </div>
             </form>
-            </ul>
-            <div class="card-body">
-             -->
-              <!-- <a href="#" class="card-link">Another link</a> -->
+          <% } else { %>
+            <div>
+              <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/login" style="margin: 1em">Login</a>
+              </div>
             </div>
-          </div>
-       <% } %>
-
-      </div>
+            <% } %>
+          <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+        </div>
+      </nav>
+  <main class="container">
+    <!-- SECTION SEARCH -->
+    <div class="search">
+      <!-- QUESTION unsure about specific route, do we include Api inside url parameters?? -->
+      <form class="d-flex" action="/api/searches/" method="GET">
+        <!-- <input type="hidden" name="searchType" value="title"> -->
+        <label for="searchType">Search By:</label>
+        <select name="searchType" id="searchType">
+          <option value="title">By Title</option>
+          <option value="artist">By Artist</option>
+          <option value="maxPrice">Max Price</option>
+          <option value="minPrice">Min Price</option>
+        <input class="form-control me-2" type="text" name="searchText" placeholder="Search" aria-label="Search">
+        <label for="searchOrder">Sort By:</label>
+        <select name="searchOrder" id="searchOrder">
+          <option value="lowPrice">Lowest Price</option>
+          <option value="highPrice">Highest Price</option>
+        </select>
+        <button class="btn btn-outline-danger button-width" type="submit"><i class="fas fa-search"></i> Search</button>
+      </form>
     </div>
-  </section>
+
+
+    <!-- SECTION LISTINGS -->
+    <section class="listings">
+      <div class="container-fluid col-lg-12">
+        <div class="row">
+          <% for (let item of items) { %>
+            <!-- CARD ELEMENT -->
+            <div class="card" style="width: 15rem;">
+              <% if (item.is_sold) { %>
+                <h2 class="sold-sign">SOLD</h2>
+              <% } %>
+              <img src="<%= item.image_url %>" class="card-img-top picture-size" alt="item">
+              <div class="card-body">
+                <h5 class="card-title"> <%= item.title %> </h5>
+                <p class="card-text"> <i> <%= item.artist %> </i> </p>
+                <p class="card-text"> <%= item.description %> </p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Price: $<%= item.price %></li>
+              <!-- <form action="/api/searches/ <%= items.id %>/favourite" method="POST">
+                <li id="favourite-button" class="list-group-item"><button type="submit">Favourite</button>
+                  <% if (item.isFavourite) { %>
+                    <i class="fas fa-heart activeHeartIcon"></i>
+                  <% } else { %>
+                  <i class="fas fa-heart"></i>
+                  <% } %>
+                  </li>
+              </form> -->
+              </ul>
+              <div class="card-body">
+              
+                <!-- <a href="#" class="card-link">Another link</a> -->
+              </div>
+            </div>
+        <% } %>
+
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

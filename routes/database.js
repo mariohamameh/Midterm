@@ -31,7 +31,7 @@ const deleteItem = function(user_id, item_id) {
 const markItemAsSold = function(item_id) {
   return pool.query(`
   UPDATE Items
-  SET isSold = TRUE
+  SET is_sold = TRUE
   WHERE _id = $1
   `, [item_id]);
 };
