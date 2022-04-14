@@ -25,7 +25,9 @@ module.exports = (database) => {
       } else {
         database.searchByMaxPrice(searchText, orderBy)
           .then((results) => {
-            const templateVars = { items: results};
+            const templateVars = {
+              items: results
+            };
             console.log("testing render for Index 1", results)
             res.render("index", templateVars)
           });
@@ -36,7 +38,9 @@ module.exports = (database) => {
       } else {
         database.searchByMinPrice(searchText, orderBy)
           .then((results) => {
-            const templateVars = { items: results };
+            const templateVars = {
+              items: results
+             };
             console.log("testing render for Index 2", results)
             res.render("index", templateVars);
           });
@@ -44,14 +48,18 @@ module.exports = (database) => {
     } else if (searchType === "title") {
       database.searchByTitle(searchText, orderBy)
         .then((results) => {
-          const templateVars = { items: results };
+          const templateVars = {
+            items: results
+           };
           console.log("testing render for Index 3", results)
           res.render("index", templateVars);
         });
     } else if (searchType === "artist") {
       database.searchByArtist(searchText, orderBy)
         .then((results) => {
-          const templateVars = { items: results };
+          const templateVars = {
+            items: results
+           };
           console.log("testing render for Index 4", results)
           res.render("index", templateVars);
         });

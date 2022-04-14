@@ -68,12 +68,13 @@ app.use("/api/searches", search(database));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+
 app.get("/", (req, res) => {
   database.getUserWithId(req.session['user_id'])
   .then((user)=> {
     database.getAllItems()
     .then((items)=> {
-      console.log(user);
+      console.log("checking for user", user);
       const templateVars = {
         user: user,
         items: items

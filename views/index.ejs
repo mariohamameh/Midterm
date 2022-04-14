@@ -21,7 +21,7 @@
   <!-- SECTION SEARCH -->
   <div class="search">
     <!-- QUESTION unsure about specific route, do we include Api inside url parameters?? -->
-    <form class="d-flex" action="/api/search/" method="GET">
+    <form class="d-flex" action="/api/searches/" method="GET">
       <!-- <input type="hidden" name="searchType" value="title"> -->
       <label for="searchType">Search By:</label>
       <select name="searchType" id="searchType">
@@ -76,7 +76,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Price: $<%= item.price %></li>
               <li class="list-group-item">Condition: <%= item.condition %></li>
-            <form action="/api/users/<%= item.id %>/favourite" method="POST">
+            <form action="/api/searches/ <%= item.id %>/favourite" method="POST">
               <li id="favourite-button" class="list-group-item"><button type="submit">Favourite</button>
                 <% if (item.isFavourite) { %>
                   <i class="fas fa-heart activeHeartIcon"></i>

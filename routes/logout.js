@@ -12,10 +12,10 @@ module.exports = (database) => {
 
   router.post("/logout", (req, res) => {
 
-    const templateVars = {
-      user: null,
-    };
-    res.render("index", templateVars);
+    // const templateVars = {
+    //   user: null,
+    // };
+    res.redirect("/");
   });
   return router;
 };
