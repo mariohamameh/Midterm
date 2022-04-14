@@ -64,13 +64,13 @@
         <% for (let item in items) { %>
           <!-- CARD ELEMENT -->
           <div class="card" style="width: 15rem;">
-            <% if (item.issold) { %>
+            <% if (item.is_sold) { %>
               <h2 class="sold-sign">SOLD</h2>
             <% } %>
             <img src= "<%= item.picture_url %>" class="card-img-top picture-size" alt="item">
             <div class="card-body">
               <h5 class="card-title"> <%= item.title %> </h5>
-              <p class="card-text"> <i><%= item.author %></i> </p>
+              <p class="card-text"> <i><%= item.artist %></i> </p>
               <p class="card-text"> <%= item.description %> </p>
             </div>
             <ul class="list-group list-group-flush">
