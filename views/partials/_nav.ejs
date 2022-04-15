@@ -1,0 +1,32 @@
+<nav id="header-outer" class ="header-outer">
+  <% if (user && user.username) { %>
+   <div class="gallery-name"> Welcome <%= user.username %> </div>
+  <% } else { %>
+    <div class="gallery-name"> The 525 Presents: </div>
+  <% } %>
+  <div id="header-inner" class="header-inner">
+    <div id="gallery-link">
+      <div class="navbar-nav">
+        <a class="login-link" href="/">Art Gallery</a>
+      </div>
+    </div>
+
+    <span class= title> WHITE SPACES EXHIBITION </span>
+        <% if (user && user.username) { %>
+          <div class="logout">
+            <form method="POST" action="/logout" class="form-inline">
+            <button type="submit" class="logout-button">Logout</button>
+          </form>
+        </div>
+        <% } else { %>
+          <div id="login-button">
+            <div class="navbar-nav">
+              <a class="login-link" href="/login">Login</a>
+            </div>
+          </div>
+          <% } %>
+        <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+        <!-- CODE CLEAN -> UNSURE AS TO WHY ↑ CODE EFFECTS ALLIGNMENT -->
+    <!-- </div> -->
+    </div>
+  </nav>
