@@ -36,14 +36,19 @@ body {
   // SEARCH BAR
   .search {
     display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+    // flex-direction: column;
+    justify-content: center;
+    margin: 0.5em;
     padding: 10px;
+    z-index: 0;
   }
 
-  .d-flex {
+  .search-form {
     width: 50%;
     margin: .5em;
+    display: flex;
+    align-content: space-between;
+    flex-direction: row;
   }
 
 .logo-div {

@@ -183,15 +183,13 @@ const searchByMinPrice = function(price, orderBy) {
 };
 
 const searchByTitle = function(title, orderBy) {
-  let queryString = `SELECT * FROM items WHERE title LIKE $1 ORDER BY;`;
-  queryString += orderBy;
-  const values = [`%${title}%`];
-  return pool.query(queryString, values)
+  return pool.query(`
+  SELECT * FROM items WHERE items.title = $1 ${orderBy};`, [title])
     .then(dbRes => {
       return dbRes.rows;
     })
     .catch(error => console.error('query error', error.stack));
-};
+  };
 
 const searchByArtist = function(artist, orderBy) {
   return pool.query(`
