@@ -47,10 +47,10 @@ module.exports = (database) => {
         });
       } else if (searchType === "artist") {
         database.searchByArtist(searchText, orderBy).then((results) => {
-          //console.log("result:",results)
+          console.log("result:",results)
           const templateVars = { user: user, items: results };
-          //console.log("testing render for Index 4", results);
-          //console.log(templateVars);
+          console.log("testing render for Index 4", results);
+          console.log(templateVars);
           res.render("index", templateVars);
         });
       } else {
