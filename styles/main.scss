@@ -59,8 +59,9 @@ body {
 }
 
 .row {
-  justify-content: space-evenly;
+  justify-content: center;
   margin-top: 10px;
+
 }
 
 .card {
@@ -183,4 +184,8 @@ title {
   color: red;
 }
 
+}
+
+.listings {
+  margin:auto;
 }
