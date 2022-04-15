@@ -24,7 +24,6 @@
   position: sticky;
   top: 0;
   background-color: white;
-  opacity: 90%;
 
   /* Other */
   display: flex;
@@ -55,7 +54,8 @@
   font-size: 1.3em;
   // border: 1.5px solid #000000;
   // border-radius: 10px;
-  margin: 0.75em 1em 1.25em 1em;
+  margin: 1em 1em 1em 1.5em;
+  font-size: 2em;
   padding: 15px;
   background-color: white;
 
@@ -86,7 +86,7 @@
 
 .logout {
   float: right;
-  font-size: 1.3em;
+  font-size: 1em;
   // border: 1.5px solid #000000;
   // border-radius: 10px;
   margin: 0.75em 1em 1.25em 1em;
