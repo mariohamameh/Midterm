@@ -44,11 +44,11 @@ module.exports = (database) => {
 
 const login =  function(email, password, database) {
   return database.getUserWithEmail(email)
-  .then(user => {
+    .then(user => {
     //hashed password goes here
-    return user;
-  });
-}
+      return user;
+    });
+};
 exports.login = login;
 
 

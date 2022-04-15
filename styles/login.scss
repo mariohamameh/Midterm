@@ -1,24 +1,45 @@
-.loginn {
+.login {
   display: flex;
   justify-content: center;
+  margin-top: 2em;
 }
 body {
   background-color: white;
   font-family: 'Montserrat', sans-serif;
-  
 
-}  
+
+}
 main {
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  h3 {
+    color: #F3B3AC
+  }
 }
 
 .formbtn{
   display: flex;
   flex-direction: column;
   align-items: center;
-  button{
-    background-color:salmon ;
+
+  button {
+      float: right;
+      font-size: 1.3em;
+      margin: 1em 1em 1em 1em;
+      padding: 15px;
+      background-color: white;
+      text-decoration: none
+
+  }
+
+  button:hover {
+    background-color: Black;
+    color: white;
+    cursor: pointer;
+    transition: background 5s;
+    text-decoration: none
+
   }
 }

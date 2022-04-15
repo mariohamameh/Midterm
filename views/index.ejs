@@ -28,24 +28,25 @@
 
 <!-- Top nav bar (fixed) -->
 <nav id="header-outer" class ="header-outer">
-  <div class="gallery"> The <br> 525  </div>
+  <% if (user && user.username) { %>
+   <div class="gallery-name"> Welcome <%= user.username %> </div>
+  <% } else { %>
+    <div class="gallery-name"> The 525 Presents: </div>
+  <% } %>
   <div id="header-inner" class="header-inner">
-      <span class=> WHITE SPACES EXHIBITION </span>
-    <div id="login-button">
+    <div id="gallery-link">
       <div class="navbar-nav">
         <a class="login-link" href="/">Art Gallery</a>
       </div>
     </div>
 
-
-      <div >
+    <span class= title> WHITE SPACES EXHIBITION </span>
         <% if (user && user.username) { %>
-          <form method="POST" action="/logout" class="form-inline">
-            <div class="logout">
-              <label>Logged In As: <%= user.username %></label>
-              <button type="submit" class="logout-button" style="margin: 1em">Logout</button>
-            </div>
+          <div class="logout">
+            <form method="POST" action="/logout" class="form-inline">
+            <button type="submit" class="logout-button">Logout</button>
           </form>
+        </div>
         <% } else { %>
           <div id="login-button">
             <div class="navbar-nav">
@@ -54,8 +55,8 @@
           </div>
           <% } %>
         <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-      </div>
-
+        <!-- CODE CLEAN -> UNSURE AS TO WHY ↑ CODE EFFECTS ALLIGNMENT -->
+    <!-- </div> -->
     </div>
   </nav>
 
@@ -65,31 +66,26 @@
 
   <main class="container">
 
-
     <!-- SECTION SEARCH -->
     <div class="search">
-      <!-- QUESTION unsure about specific route, do we include Api inside url parameters?? -->
       <form class="search-form" action="/api/searches/" method="GET">
-        <!-- <input type="hidden" name="searchType" value="title"> -->
-        <label for="searchType">Search By:</label>
-        <select name="searchType" id="searchType">
+        <label for="searchType" >Search By:</label>
+        <select name="searchType" id="searchType" style="margin: 1em;">
           <option value="title">By Title</option>
           <option value="artist">By Artist</option>
-          <option value="maxPrice">Max Price</option>
-          <option value="minPrice">Min Price</option>
-        <input class="form-control me-2" type="text" name="searchText" placeholder="Search" aria-label="Search">
+        <input class="form-control me-2" type="text" name="searchText" placeholder="Search" style="margin: 1em;" aria-label="Search">
         <label for="searchOrder">Sort By:</label>
-        <select name="searchOrder" id="searchOrder">
+        <select name="searchOrder" style="margin: 1em;" id="searchOrder">
           <option value="lowPrice">Lowest Price</option>
           <option value="highPrice">Highest Price</option>
         </select>
-        <button class="btn btn-outline-danger button-width" type="submit"><i class="fas fa-search"></i> Search</button>
+        <button class="search-button" type="submit" style="margin: 1em;"> Search</button>
       </form>
     </div>
 
 
-    <!-- SECTION LISTINGS -->
-    <section class="listings">
+    <!-- SECTION ITEMS -->
+    <section class="items-container">
       <div class="container-fluid col-lg-12">
         <div class="row">
           <% for (let item of items) { %>

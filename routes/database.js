@@ -66,7 +66,7 @@ const getAllUsers = ()=>{
     .catch(error => console.error('query error', error.stack));
 };
 //database
-const getUserWithEmail = function (email) {
+const getUserWithEmail = function(email) {
   return pool
     .query(`SELECT * FROM users WHERE email = $1`, [email])
     .then((dbRes) => {
@@ -80,7 +80,7 @@ const getUserWithEmail = function (email) {
 
 };
 exports.getUserWithEmail = getUserWithEmail;
-const getUserWithId = function (id) {
+const getUserWithId = function(id) {
   return pool
     .query(`SELECT * FROM users WHERE id = $1`, [id])
     .then((dbRes) => {
@@ -145,8 +145,8 @@ const getAllItems = function() { //// removed user_id as parameter from original
     return dbRes.rows;
   }).catch(error => {
     console.error('query error', error.stack);
-    return []
-  })
+    return [];
+  });
 };
 
 const isItemFavourited = function(user_id, item_id) {
@@ -189,7 +189,7 @@ const searchByTitle = function(title, orderBy) {
       return dbRes.rows;
     })
     .catch(error => console.error('query error', error.stack));
-  };
+};
 
 const searchByArtist = function(artist, orderBy) {
   return pool.query(`
@@ -198,7 +198,7 @@ const searchByArtist = function(artist, orderBy) {
       return dbRes.rows;
     })
     .catch(error => console.error('query error', error.stack));
-  };
+};
 
 
 
@@ -238,7 +238,7 @@ const getMessagesForConversation = function(conversation_id) {
 
 
 const sendMessage = (message) => {
-const values = [
+  const values = [
     message.from_user,
     message.item_id,
     message.message,

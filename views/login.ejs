@@ -2,19 +2,24 @@
 <html lang="en">
   <head>
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+    <!-- App CSS -->
     <link rel="stylesheet" href="/styles/login.css" type="text/css" />
+
   </head>
-  <div class="loginn">
+
+
+  <div class="login">
     <body>
       <main>
-        <h3>Login</h3>
-        <form method="POST" action="/login">
+        <h3>The 525</h3>
+        <form method="POST" action="/login" >
           <div class="form">
             <label for="email">Email Address:</label>
             <input
@@ -26,13 +31,7 @@
             />
           </div>
           <div class="formbtn">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="width: 250px; margin: 1em"
-            >
-              Login
-            </button>
+            <button type="submit" class="form-button"> Login </button>
           </div>
         </form>
       </main>

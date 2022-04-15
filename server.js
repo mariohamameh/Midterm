@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 // Web server config
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3005;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
@@ -51,7 +51,7 @@ const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const users = require("./routes/login");
 const search = require("./routes/searches");
-const conversations = require("./routes/conversations")
+const conversations = require("./routes/conversations");
 const favourites = require("./routes/favourites");
 
 const userlogout = require("./routes/logout");
@@ -71,17 +71,17 @@ app.use("/api/searches", search(database));
 
 app.get("/", (req, res) => {
   database.getUserWithId(req.session['user_id'])
-  .then((user)=> {
-    database.getAllItems()
-    .then((items)=> {
-      console.log("checking for user", user);
-      const templateVars = {
-        user: user,
-        items: items
-      }
-      res.render("index", templateVars );
-    })
-  });
+    .then((user)=> {
+      database.getAllItems()
+        .then((items)=> {
+          console.log("checking for user", user);
+          const templateVars = {
+            user: user,
+            items: items
+          };
+          res.render("index", templateVars);
+        });
+    });
 
 });
 

@@ -17,20 +17,20 @@ Web app designed as digital marketplace for art.
 - [] Messages: Avaliable once user message buyers
 - [] Add Item Page: Create Listing for new items 
   ### Login
-- [] Have a profile with username and id # associated with account 
-- [] Site remembers user once logged in
+- [X] Have a profile with username and id # associated with account 
+- [X] Site remembers user once logged in
   ### Items
 - [] Each item will have image, artist name, artist bio, price if avaliable, seller(admin) name
 - [] Favourite items while browsing items
 - [] If item is SOLD, cannot be favourites and removed from favourites
   ### Nav Bar
 - [] Link to favorite items for easy access
-- [] Search bar for items ("search by artist in placeholder")
-- [] Return to main page
+- [X] Search bar for items ("search by artist in placeholder")
+- [X] Return to main page
 - [] Link to conversatitons
   ### Search and Filter 
-- [] Filter search by price 
-- [] Search and Filter artist
+- [X] Filter search by price 
+- [X] Search and Filter artist
   ### Messaging & Conversations
 - [] For each item, contact seller to inquire about purchasing an item via buil-in messager
 - [] For each item, Contact seller to inquire about purchasing an item via email
