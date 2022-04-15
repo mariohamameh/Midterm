@@ -23,6 +23,7 @@
   height: var(--header-inner-height);
   position: sticky;
   top: 0;
+  background-color: white;
 
   /* Other */
   display: flex;
@@ -32,13 +33,17 @@
 
 }
 
+.gallery {
+  margin: 0.5em 0.2em 0.2em 0.5em;
+  font-size: 1em;
+}
+
 .title{
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  margin: 5em 5em 2em 2em;
-
+  margin: 1em 1em 1em 2em;
   font-size: 2em;
 
 }
@@ -48,7 +53,7 @@
   font-size: 1.3em;
   // border: 1.5px solid #000000;
   // border-radius: 10px;
-  margin: 4em 2em 2em 2em;
+  margin: 0.75em 1em 1.25em 1em;
   padding: 15px;
   background-color: white;
 
@@ -66,8 +71,8 @@
 }
 
 #login-button:hover {
-  border: 2.5px solid white;
-  margin: 9px;
+  // border: 2.5px solid white;
+  margin: 1em 1em 1em 1em;
   background-color: Black;
   color: white;
   cursor: pointer;
