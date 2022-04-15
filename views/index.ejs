@@ -28,21 +28,21 @@
 
 <!-- Top nav bar (fixed) -->
 <nav id="header-outer" class ="header-outer">
-  <div class="gallery"> Art <br> Gallery  </div>
+  <div class="gallery"> The <br> 525  </div>
   <div id="header-inner" class="header-inner">
 
-      <span class="title">The 525 </span>
+      <span class="title"> Art Gallery </span>
 
-      <div id="login-button">
+      <div >
         <% if (user && user.username) { %>
           <form method="POST" action="/logout" class="form-inline">
-            <div>
+            <div class="logout">
               <label>Logged In As: <%= user.username %></label>
-              <button type="submit" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
+              <button type="submit" class="logout-button" style="margin: 1em">Logout</button>
             </div>
           </form>
         <% } else { %>
-          <div>
+          <div id="login-button">
             <div class="navbar-nav">
               <a class="login-link" href="/login">Login</a>
             </div>
