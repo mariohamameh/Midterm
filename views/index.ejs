@@ -12,41 +12,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="scripts/app.js"></script>
+
 </head>
 
-<body>
-     <!-- Top nav bar (fixed) -->
-     <nav id="nav-bar">
-      <div id="logoContainer">
+<!-- Top nav bar (fixed) -->
+<nav id="header-outer" class ="header-outer">
+  <div id="header-inner" class="header-inner">
 
-        <span class="header">LOGO Location</span>
-        </div>
-        <div id="loginButton">
-          <% if (user && user.username) { %>
-            <form method="POST" action="/logout" class="form-inline">
-              <div>
-                <label>Logged In As: <%= user.username %></label>
-                <button type="submit" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
-              </div>
-            </form>
-          <% } else { %>
+      <span class="title">The 525</span>
+
+      <div id="login-button">
+        <% if (user && user.username) { %>
+          <form method="POST" action="/logout" class="form-inline">
             <div>
-              <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/login" style="margin: 1em">Login</a>
-              </div>
+              <label>Logged In As: <%= user.username %></label>
+              <button type="submit" class="btn btn-outline-dark" style="margin: 1em">Logout</button>
             </div>
-            <% } %>
-          <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-        </div>
-      </nav>
+          </form>
+        <% } else { %>
+          <div>
+            <div class="navbar-nav">
+              <a class="login-link" href="/login">Login</a>
+            </div>
+          </div>
+          <% } %>
+        <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+      </div>
+
+    </div>
+  </nav>
+
+
+
+<body>
+
   <main class="container">
+
+
     <!-- SECTION SEARCH -->
     <div class="search">
       <!-- QUESTION unsure about specific route, do we include Api inside url parameters?? -->
@@ -75,7 +88,7 @@
         <div class="row">
           <% for (let item of items) { %>
             <!-- CARD ELEMENT -->
-            <div class="card" style="width: 15rem;">
+            <div class="card">
               <% if (item.is_sold) { %>
                 <h2 class="sold-sign">SOLD</h2>
               <% } %>
@@ -98,7 +111,7 @@
               </form> -->
               </ul>
               <div class="card-body">
-              
+
                 <!-- <a href="#" class="card-link">Another link</a> -->
               </div>
             </div>

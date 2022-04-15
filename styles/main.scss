@@ -1,24 +1,50 @@
 // See: https://sass-lang.com/
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+:root {
+  --header-outer-height: 125px;
+  --header-inner-height: 60px;
+  --header-height-difference: calc(
+    var(--header-outer-height) - var(--header-inner-height)
+  );
+}
+
 
 body {
   background-color: white;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
 
   main {
     width: 90%;
     height: 100%;
-    background: #eee;
 
     display: flex;
     flex-direction: column;
     vertical-align: bottom;
+    justify-content: center;
+    // align-items: center;
 
     margin: auto;
     padding: 100px 0 70px 0;
   }
 
+  // SEARCH BAR
+  .search {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 10px;
+  }
 
-
+  .d-flex {
+    width: 50%;
+    margin: .5em;
+  }
 
 .logo-div {
   display: flex;
@@ -28,6 +54,8 @@ body {
 
 .picture-size {
   padding: 2em;;
+  max-height: 50em;
+  max-width: 50em;
 }
 
 .row {
@@ -35,25 +63,22 @@ body {
   margin-top: 10px;
 }
 
-.search {
+.card {
+  height: 50em;
+  width: 50em;;
+  margin: 1em;
+
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
-  padding: 10px;
+
 }
 
-.d-flex {
-  width: 50%;
-  margin: .5em;
-}
-
-.card {
-  margin: 1em;
-  border: #D45B5B solid 1px;
-}
 .card:hover {
   /* box-shadow: 10px 10px 5px grey; */
   border: #D45B5B solid;
+  transition: background 3s;
+  vertical-align: bottom;
+  justify-content: center;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -143,14 +168,6 @@ body {
   color: red;
 }
 
-nav {
- background-color: #D45B5B;
- width: 100%;
-}
-body {
-  background-color: #EEE;
-  font-family: 'Ubuntu';
-}
 h1 {
   color: #D45B5B;
 }
