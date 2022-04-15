@@ -1,7 +1,24 @@
+.loginn {
+  display: flex;
+  justify-content: center;
+}
 body {
   background-color: white;
   font-family: 'Montserrat', sans-serif;
-  position: relative;
+  
 
+}  
+main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
+.formbtn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  button{
+    background-color:salmon ;
+  }
 }
