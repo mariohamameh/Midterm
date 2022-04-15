@@ -73,9 +73,9 @@ module.exports = (database) => {
   });
 
   // DELETE delete your listing(s): Done
-  router.post("/my_listings/:listing_id/delete", (req, res) => {
+  router.post("/my_listings/:items_id/delete", (req, res) => {
     const userID = req.session.user_id;
-    const listingID = req.params.listing_id;
+    const listingID = req.params.items_id;
     if (!userID) {
       res.redirect("/");
     }
@@ -87,9 +87,9 @@ module.exports = (database) => {
 
 
   // PUT mark your listing as sold: Done
-  router.post("/my_listings/:listing_id/sold", (req, res) => {
+  router.post("/my_listings/:items_id/sold", (req, res) => {
     const userID = req.session.user_id
-    const listingID = req.params.listing_id;
+    const listingID = req.params.items_id;
 
     if(!userID) {
     return res.redirect("/");
