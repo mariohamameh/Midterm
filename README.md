@@ -1,7 +1,7 @@
 The 525 Presents:
 WHITE SPACES EXHIBITION
 
-A Virtual Gallery Template:::
+A Virtual Gallery Template
 =========
 
 ## Project Overview 
