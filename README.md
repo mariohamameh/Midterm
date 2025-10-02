@@ -4,7 +4,7 @@ WHITE SPACES EXHIBITION
 A Virtual Gallery Template
 =========
 
-## Project Overview ::
+## Project Overview
 
 Project Specific Requirements
 Option 8: Buy/Sell Listing Website
