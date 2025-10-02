@@ -15,7 +15,7 @@ Web app designed as digital marketplace for art.
 ## ERD and User Story
 Still in Developement: https://app.diagrams.net/#G1ot8x0qzHySC6tR81g4NNrO2CQOLjYqyr
 
-## Project Requirements -> User Story & Functionality::
+## Project Requirements -> User Story & Functionality:::
 - [] Finish User Story and ERD with full functionality
 - [] Main Page: feature items randomized from Favourites
 - [] Login Page: Cannot access site without login from registered user
