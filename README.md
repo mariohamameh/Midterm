@@ -6,7 +6,7 @@ A Virtual Gallery Template
 
 ## Project Overview
 
-Project Specific Requirements::
+Project Specific Requirements:::
 Option 8: Buy/Sell Listing Website
 
 Web app designed as digital marketplace for art.
